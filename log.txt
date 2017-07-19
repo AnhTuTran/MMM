@@ -1,0 +1,19 @@
+                                Xeon(GFLOPS)                KNC(GFLOPS)
+Baseline                        0.618999                    0.00762396    
+100x100x10x10 
+X
+100x100x10x10
+= 
+100x100x10x10      
+
+switch j loop
+and use pragma omp simd         3.23739                     0.269958
+
+pragma omp parallel 
+for collapse(3) private...      15.0749                     35.0968
+
+sizex100                        12.7026                     33.9264
+
+align 64-byte mem               19.8896                     33.3571
+            
+compare with dgemm_mkl          7.87818s/1.13627s           5.56701s/0.677518s

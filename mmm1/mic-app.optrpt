@@ -1,0 +1,916 @@
+Intel(R) Advisor can now assist with vectorization and show optimization
+  report messages with your source code.
+See "https://software.intel.com/en-us/intel-advisor-xe" for details.
+
+Intel(R) C++ Intel(R) 64 Compiler for applications running on Intel(R) MIC Architecture, Version 17.0.4.196 Build 20170411
+
+Compiler options: -qopenmp -mmic -qopt-report=5 -qopt-report-file=mic-app.optrpt -o mic-app
+
+    Report from: Interprocedural optimizations [ipo]
+
+  WHOLE PROGRAM (SAFE) [EITHER METHOD]: false
+  WHOLE PROGRAM (SEEN) [TABLE METHOD]: false
+  WHOLE PROGRAM (READ) [OBJECT READER METHOD]: false
+
+INLINING OPTION VALUES:
+  -inline-factor: 100
+  -inline-min-size: 30
+  -inline-max-size: 230
+  -inline-max-total-size: 2000
+  -inline-max-per-routine: 10000
+  -inline-max-per-compile: 500000
+
+In the inlining report below:
+   "sz" refers to the "size" of the routine. The smaller a routine's size,
+      the more likely it is to be inlined.
+   "isz" refers to the "inlined size" of the routine. This is the amount
+      the calling routine will grow if the called routine is inlined into it.
+      The compiler generally limits the amount a routine can grow by having
+      routines inlined into it.
+
+Begin optimization report for: main()
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (main()) [1/22=4.5%] main.cpp(261,12)
+  -> (263,14) std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &, const char *) (isz = 15) (sz = 24)
+     [[ Called routine is noinline  <1>]]
+  -> INLINE: (265,5) d4d_test1() (isz = 89) (sz = 92)
+    -> EXTERN: (80,16) ?1memcpy
+    -> EXTERN: (81,16) ?1memcpy
+    -> (110,5) d_4d_mm(double *, double *, double *, long *, long *, long *, int, int) (isz = 323) (sz = 342)
+       [[ Inlining would exceed -inline-max-size value (342>230) <2>]]
+    -> (113,14) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, double) (isz = 1) (sz = 10)
+       [[ Called routine is noinline  <1>]]
+    -> (113,22) std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &, char) (isz = 3) (sz = 12)
+       [[ Called routine is noinline  <1>]]
+    -> (114,10) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, std::basic_ostream<char, std::char_traits<char>>::__ostream_type &(*)(std::basic_ostream<char, std::char_traits<char>>::__ostream_type &)) (isz = 0) (sz = 9)
+       [[ Called routine is noinline  <1>]]
+  -> INLINE: (268,5) d4d_test3() (isz = 193) (sz = 196)
+    -> EXTERN: (198,15) operator new[](std::size_t)
+    -> EXTERN: (199,15) operator new[](std::size_t)
+    -> EXTERN: (200,15) operator new[](std::size_t)
+    -> EXTERN: (239,24) omp_get_wtime()
+    -> (240,9) d_4d_mm(double *, double *, double *, long *, long *, long *, int, int) (isz = 323) (sz = 342)
+       [[ Inlining would exceed -inline-max-size value (342>230) <2>]]
+    -> EXTERN: (241,24) omp_get_wtime()
+    -> (243,14) std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &, const char *) (isz = 15) (sz = 24)
+       [[ Called routine is noinline  <1>]]
+    -> (243,30) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, double) (isz = 1) (sz = 10)
+       [[ Called routine is noinline  <1>]]
+    -> (243,46) std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &, const char *) (isz = 15) (sz = 24)
+       [[ Called routine is noinline  <1>]]
+    -> (244,14) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, double) (isz = 1) (sz = 10)
+       [[ Called routine is noinline  <1>]]
+    -> (244,79) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, std::basic_ostream<char, std::char_traits<char>>::__ostream_type &(*)(std::basic_ostream<char, std::char_traits<char>>::__ostream_type &)) (isz = 0) (sz = 9)
+       [[ Called routine is noinline  <1>]]
+    -> (246,10) std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &, const char *) (isz = 15) (sz = 24)
+       [[ Called routine is noinline  <1>]]
+    -> (248,10) std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &, const char *) (isz = 15) (sz = 24)
+       [[ Called routine is noinline  <1>]]
+    -> (248,34) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, double) (isz = 1) (sz = 10)
+       [[ Called routine is noinline  <1>]]
+    -> (248,42) std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &, const char *) (isz = 15) (sz = 24)
+       [[ Called routine is noinline  <1>]]
+    -> (249,10) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, double) (isz = 1) (sz = 10)
+       [[ Called routine is noinline  <1>]]
+    -> (249,66) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, std::basic_ostream<char, std::char_traits<char>>::__ostream_type &(*)(std::basic_ostream<char, std::char_traits<char>>::__ostream_type &)) (isz = 0) (sz = 9)
+       [[ Called routine is noinline  <1>]]
+    -> EXTERN: (256,5) operator delete[](void *)
+    -> EXTERN: (257,5) operator delete[](void *)
+    -> EXTERN: (258,5) operator delete[](void *)
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at main.cpp(108,5) inlined into main.cpp(265,5)
+   remark #15389: vectorization support: reference C[$i1] has unaligned access
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15329: vectorization support: unit-strided store was emulated for the variable <C[$i1]>, element aligned
+   remark #15305: vectorization support: vector length 4
+   remark #15427: loop was completely unrolled
+   remark #15309: vectorization support: normalized vectorization overhead 0.778
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15451: unmasked unaligned unit stride stores: 1 
+   remark #15475: --- begin vector cost summary ---
+   remark #15476: scalar cost: 4 
+   remark #15477: vector cost: 2.250 
+   remark #15478: estimated potential speedup: 1.000 
+   remark #15488: --- end vector cost summary ---
+LOOP END
+
+LOOP BEGIN at main.cpp(112,5) inlined into main.cpp(265,5)
+   remark #15382: vectorization support: call to function std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, double) cannot be vectorized   [ main.cpp(113,14) ]
+   remark #15382: vectorization support: call to function std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &, char) cannot be vectorized   [ main.cpp(113,22) ]
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization
+   remark #25436: completely unrolled by 4  
+LOOP END
+
+LOOP BEGIN at main.cpp(231,5) inlined into main.cpp(268,5)
+<Peeled loop for vectorization>
+   remark #15389: vectorization support: reference A[i] has unaligned access   [ main.cpp(232,9) ]
+   remark #15389: vectorization support: reference B[i] has unaligned access   [ main.cpp(233,9) ]
+   remark #15389: vectorization support: reference C[i] has unaligned access   [ main.cpp(234,9) ]
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15410: vectorization support: conversion from int to float will be emulated   [ main.cpp(232,16) ]
+   remark #15305: vectorization support: vector length 8
+   remark #15309: vectorization support: normalized vectorization overhead 0.241
+   remark #15301: PEEL LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at main.cpp(231,5) inlined into main.cpp(268,5)
+   remark #15389: vectorization support: reference A[i] has unaligned access   [ main.cpp(232,9) ]
+   remark #15388: vectorization support: reference B[i] has aligned access   [ main.cpp(233,9) ]
+   remark #15388: vectorization support: reference C[i] has aligned access   [ main.cpp(234,9) ]
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15412: vectorization support: streaming store was generated for A[i]   [ main.cpp(232,9) ]
+   remark #15412: vectorization support: streaming store was generated for B[i]   [ main.cpp(233,9) ]
+   remark #15412: vectorization support: streaming store was generated for C[i]   [ main.cpp(234,9) ]
+   remark #15412: vectorization support: streaming store was generated for A[i]   [ main.cpp(232,9) ]
+   remark #15412: vectorization support: streaming store was generated for B[i]   [ main.cpp(233,9) ]
+   remark #15412: vectorization support: streaming store was generated for C[i]   [ main.cpp(234,9) ]
+   remark #15410: vectorization support: conversion from int to float will be emulated   [ main.cpp(232,16) ]
+   remark #15305: vectorization support: vector length 8
+   remark #15309: vectorization support: normalized vectorization overhead 0.283
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15451: unmasked unaligned unit stride stores: 1 
+   remark #15467: unmasked aligned streaming stores: 3 
+   remark #15469: unmasked unaligned streaming stores: 3 
+   remark #15475: --- begin vector cost summary ---
+   remark #15476: scalar cost: 39 
+   remark #15477: vector cost: 6.620 
+   remark #15478: estimated potential speedup: 5.880 
+   remark #15486: divides: 1 
+   remark #15487: type converts: 1 
+   remark #15488: --- end vector cost summary ---
+   remark #25018: Total number of lines prefetched=2
+   remark #25021: Number of initial-value prefetches=4
+   remark #25035: Number of pointer data prefetches=2, dist=8
+   remark #25141: Using second-level distance 4 for prefetching pointer data reference   [ main.cpp(232,9) ]
+   remark #25015: Estimate of max trip count of loop=125000
+LOOP END
+
+LOOP BEGIN at main.cpp(231,5) inlined into main.cpp(268,5)
+<Alternate Alignment Vectorized Loop>
+   remark #25018: Total number of lines prefetched=4
+   remark #25021: Number of initial-value prefetches=6
+   remark #25035: Number of pointer data prefetches=4, dist=8
+   remark #25141: Using second-level distance 4 for prefetching pointer data reference   [ main.cpp(232,9) ]
+   remark #25141: Using second-level distance 4 for prefetching pointer data reference   [ main.cpp(233,9) ]
+   remark #25015: Estimate of max trip count of loop=125000
+LOOP END
+
+LOOP BEGIN at main.cpp(231,5) inlined into main.cpp(268,5)
+<Remainder loop for vectorization>
+   remark #15389: vectorization support: reference A[i] has unaligned access   [ main.cpp(232,9) ]
+   remark #15389: vectorization support: reference B[i] has unaligned access   [ main.cpp(233,9) ]
+   remark #15388: vectorization support: reference C[i] has aligned access   [ main.cpp(234,9) ]
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15410: vectorization support: conversion from int to float will be emulated   [ main.cpp(232,16) ]
+   remark #15305: vectorization support: vector length 8
+   remark #15309: vectorization support: normalized vectorization overhead 0.233
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at main.cpp(238,5) inlined into main.cpp(268,5)
+   remark #15382: vectorization support: call to function omp_get_wtime() cannot be vectorized   [ main.cpp(239,24) ]
+   remark #15382: vectorization support: call to function d_4d_mm(double *, double *, double *, long *, long *, long *, int, int) cannot be vectorized   [ main.cpp(240,9) ]
+   remark #15382: vectorization support: call to function omp_get_wtime() cannot be vectorized   [ main.cpp(241,24) ]
+   remark #15382: vectorization support: call to function std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &, const char *) cannot be vectorized   [ main.cpp(243,14) ]
+   remark #15382: vectorization support: call to function std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, double) cannot be vectorized   [ main.cpp(243,30) ]
+   remark #15382: vectorization support: call to function std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &, const char *) cannot be vectorized   [ main.cpp(243,46) ]
+   remark #15382: vectorization support: call to function std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, double) cannot be vectorized   [ main.cpp(244,14) ]
+   remark #15382: vectorization support: call to function std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, std::basic_ostream<char, std::char_traits<char>>::__ostream_type &(*)(std::basic_ostream<char, std::char_traits<char>>::__ostream_type &)) cannot be vectorized   [ main.cpp(244,79) ]
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization
+   remark #25015: Estimate of max trip count of loop=7
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+main.cpp(80,16):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (64, 0), and destination (alignment, offset): (64, 0)
+main.cpp(81,16):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (64, 0), and destination (alignment, offset): (64, 0)
+main.cpp(261,12):remark #34051: REGISTER ALLOCATION : [main] main.cpp:261
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   63[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm31 k0-k7]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   54[ rax rdx rcx rbx rsi rdi r8-r15 zmm0-zmm31 k0-k7]
+        
+    Routine temporaries
+        Total         :     605
+            Global    :     117
+            Local     :     488
+        Regenerable   :     100
+        Spilled       :      17
+        
+    Routine stack
+        Variables     :     444 bytes*
+            Reads     :      16 [3.06e+01 ~ 0.0%]
+            Writes    :      43 [4.57e+01 ~ 0.0%]
+        Spills        :     376 bytes*
+            Reads     :      27 [1.09e+02 ~ 0.0%]
+            Writes    :      15 [2.82e+01 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: test1()
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (test1()) [2/22=9.1%] main.cpp(7,14)
+  -> (8,10) std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &, const char *) (isz = 15) (sz = 24)
+     [[ Called routine is noinline  <1>]]
+  -> (9,10) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, long) (isz = 1) (sz = 10)
+     [[ Called routine is noinline  <1>]]
+  -> EXTERN: (9,13) sysconf(int)
+  -> (9,43) std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &, char) (isz = 3) (sz = 12)
+     [[ Called routine is noinline  <1>]]
+
+
+    Report from: Code generation optimizations [cg]
+
+main.cpp(7,14):remark #34051: REGISTER ALLOCATION : [_Z5test1v] main.cpp:7
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   55[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm31]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :    4[ rax rsi rdi r14]
+        
+    Routine temporaries
+        Total         :      21
+            Global    :      12
+            Local     :       9
+        Regenerable   :       6
+        Spilled       :       1
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: d4d_test1()
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (d4d_test1()) [4/22=18.2%] main.cpp(79,18)
+  -> EXTERN: (80,16) ?1memcpy
+  -> EXTERN: (81,16) ?1memcpy
+  -> (110,5) d_4d_mm(double *, double *, double *, long *, long *, long *, int, int) (isz = 323) (sz = 342)
+     [[ Inlining would exceed -inline-max-size value (342>230) <2>]]
+  -> (113,14) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, double) (isz = 1) (sz = 10)
+     [[ Called routine is noinline  <1>]]
+  -> (113,22) std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &, char) (isz = 3) (sz = 12)
+     [[ Called routine is noinline  <1>]]
+  -> (114,10) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, std::basic_ostream<char, std::char_traits<char>>::__ostream_type &(*)(std::basic_ostream<char, std::char_traits<char>>::__ostream_type &)) (isz = 0) (sz = 9)
+     [[ Called routine is noinline  <1>]]
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at main.cpp(108,5)
+   remark #15389: vectorization support: reference C[$i1] has unaligned access
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15329: vectorization support: unit-strided store was emulated for the variable <C[$i1]>, element aligned
+   remark #15305: vectorization support: vector length 4
+   remark #15427: loop was completely unrolled
+   remark #15309: vectorization support: normalized vectorization overhead 0.778
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15451: unmasked unaligned unit stride stores: 1 
+   remark #15475: --- begin vector cost summary ---
+   remark #15476: scalar cost: 4 
+   remark #15477: vector cost: 2.250 
+   remark #15478: estimated potential speedup: 1.000 
+   remark #15488: --- end vector cost summary ---
+LOOP END
+
+LOOP BEGIN at main.cpp(112,5)
+   remark #15382: vectorization support: call to function std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, double) cannot be vectorized   [ main.cpp(113,14) ]
+   remark #15382: vectorization support: call to function std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &, char) cannot be vectorized   [ main.cpp(113,22) ]
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization
+   remark #25436: completely unrolled by 4  
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+main.cpp(80,16):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (64, 0), and destination (alignment, offset): (64, 0)
+main.cpp(81,16):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (64, 0), and destination (alignment, offset): (64, 0)
+main.cpp(79,18):remark #34051: REGISTER ALLOCATION : [_Z9d4d_test1v] main.cpp:79
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   63[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm31 k0-k7]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :    9[ rax rdx rcx rsi rdi r8-r9 zmm0 k1]
+        
+    Routine temporaries
+        Total         :      70
+            Global    :      16
+            Local     :      54
+        Regenerable   :      32
+        Spilled       :       0
+        
+    Routine stack
+        Variables     :     320 bytes*
+            Reads     :       4 [4.00e+00 ~ 4.2%]
+            Writes    :      23 [2.30e+01 ~ 24.0%]
+        Spills        :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: d4d_test2()
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (d4d_test2()) [6/22=27.3%] main.cpp(117,18)
+  -> EXTERN: (118,16) ?1memcpy
+  -> EXTERN: (120,16) ?1memcpy
+  -> (150,5) d_4d_mm(double *, double *, double *, long *, long *, long *, int, int) (isz = 323) (sz = 342)
+     [[ Inlining would exceed -inline-max-size value (342>230) <2>]]
+  -> (153,14) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, double) (isz = 1) (sz = 10)
+     [[ Called routine is noinline  <1>]]
+  -> (153,22) std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &, char) (isz = 3) (sz = 12)
+     [[ Called routine is noinline  <1>]]
+  -> (154,10) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, std::basic_ostream<char, std::char_traits<char>>::__ostream_type &(*)(std::basic_ostream<char, std::char_traits<char>>::__ostream_type &)) (isz = 0) (sz = 9)
+     [[ Called routine is noinline  <1>]]
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at main.cpp(148,5)
+   remark #15388: vectorization support: reference C[$i1] has aligned access
+   remark #15305: vectorization support: vector length 8
+   remark #15427: loop was completely unrolled
+   remark #15399: vectorization support: unroll factor set to 2
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15475: --- begin vector cost summary ---
+   remark #15476: scalar cost: 4 
+   remark #15477: vector cost: 0.370 
+   remark #15478: estimated potential speedup: 10.660 
+   remark #15488: --- end vector cost summary ---
+LOOP END
+
+LOOP BEGIN at main.cpp(152,5)
+   remark #15382: vectorization support: call to function std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, double) cannot be vectorized   [ main.cpp(153,14) ]
+   remark #15382: vectorization support: call to function std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &, char) cannot be vectorized   [ main.cpp(153,22) ]
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization
+   remark #25018: Total number of lines prefetched=1
+   remark #25019: Number of spatial prefetches=1, dist=2
+   remark #25021: Number of initial-value prefetches=1
+   remark #25015: Estimate of max trip count of loop=16
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+main.cpp(118,16):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (64, 0), and destination (alignment, offset): (64, 0)
+main.cpp(120,16):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (64, 0), and destination (alignment, offset): (64, 0)
+main.cpp(117,18):remark #34051: REGISTER ALLOCATION : [_Z9d4d_test2v] main.cpp:117
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   63[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm31 k0-k7]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   13[ rax rdx rcx rsi rdi r8-r9 r12-r13 zmm0-zmm2 k1]
+        
+    Routine temporaries
+        Total         :      45
+            Global    :      12
+            Local     :      33
+        Regenerable   :      24
+        Spilled       :       2
+        
+    Routine stack
+        Variables     :     608 bytes*
+            Reads     :       1 [1.60e+01 ~ 5.9%]
+            Writes    :      20 [2.00e+01 ~ 7.4%]
+        Spills        :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: d3d_test1()
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (d3d_test1()) [7/22=31.8%] main.cpp(157,18)
+  -> EXTERN: (158,16) ?1memcpy
+  -> EXTERN: (159,16) ?1memcpy
+  -> (188,5) d_4d_mm(double *, double *, double *, long *, long *, long *, int, int) (isz = 323) (sz = 342)
+     [[ Inlining would exceed -inline-max-size value (342>230) <2>]]
+  -> (191,14) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, double) (isz = 1) (sz = 10)
+     [[ Called routine is noinline  <1>]]
+  -> (191,22) std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &, char) (isz = 3) (sz = 12)
+     [[ Called routine is noinline  <1>]]
+  -> (192,10) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, std::basic_ostream<char, std::char_traits<char>>::__ostream_type &(*)(std::basic_ostream<char, std::char_traits<char>>::__ostream_type &)) (isz = 0) (sz = 9)
+     [[ Called routine is noinline  <1>]]
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at main.cpp(186,5)
+   remark #15389: vectorization support: reference C[$i1] has unaligned access
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15329: vectorization support: unit-strided store was emulated for the variable <C[$i1]>, element aligned
+   remark #15305: vectorization support: vector length 2
+   remark #15427: loop was completely unrolled
+   remark #15309: vectorization support: normalized vectorization overhead 0.778
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15451: unmasked unaligned unit stride stores: 1 
+   remark #15475: --- begin vector cost summary ---
+   remark #15476: scalar cost: 4 
+   remark #15477: vector cost: 4.500 
+   remark #15478: estimated potential speedup: 0.500 
+   remark #15488: --- end vector cost summary ---
+LOOP END
+
+LOOP BEGIN at main.cpp(190,5)
+   remark #15382: vectorization support: call to function std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, double) cannot be vectorized   [ main.cpp(191,14) ]
+   remark #15382: vectorization support: call to function std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &, char) cannot be vectorized   [ main.cpp(191,22) ]
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization
+   remark #25436: completely unrolled by 2  
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+main.cpp(158,16):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (16, 0), and destination (alignment, offset): (16, 0)
+main.cpp(159,16):remark #34000: call to memcpy implemented inline with loads and stores with proven source (alignment, offset): (16, 0), and destination (alignment, offset): (16, 0)
+main.cpp(157,18):remark #34051: REGISTER ALLOCATION : [_Z9d3d_test1v] main.cpp:157
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   63[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm31 k0-k7]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :    9[ rax rdx rcx rsi rdi r8-r9 zmm0 k1]
+        
+    Routine temporaries
+        Total         :      53
+            Global    :      12
+            Local     :      41
+        Regenerable   :      27
+        Spilled       :       0
+        
+    Routine stack
+        Variables     :     176 bytes*
+            Reads     :       2 [2.00e+00 ~ 2.7%]
+            Writes    :      21 [2.10e+01 ~ 28.0%]
+        Spills        :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: d4d_test3()
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (d4d_test3()) [8/22=36.4%] main.cpp(195,18)
+  -> EXTERN: (198,15) operator new[](std::size_t)
+  -> EXTERN: (199,15) operator new[](std::size_t)
+  -> EXTERN: (200,15) operator new[](std::size_t)
+  -> EXTERN: (239,24) omp_get_wtime()
+  -> (240,9) d_4d_mm(double *, double *, double *, long *, long *, long *, int, int) (isz = 323) (sz = 342)
+     [[ Inlining would exceed -inline-max-size value (342>230) <2>]]
+  -> EXTERN: (241,24) omp_get_wtime()
+  -> (243,14) std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &, const char *) (isz = 15) (sz = 24)
+     [[ Called routine is noinline  <1>]]
+  -> (243,30) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, double) (isz = 1) (sz = 10)
+     [[ Called routine is noinline  <1>]]
+  -> (243,46) std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &, const char *) (isz = 15) (sz = 24)
+     [[ Called routine is noinline  <1>]]
+  -> (244,14) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, double) (isz = 1) (sz = 10)
+     [[ Called routine is noinline  <1>]]
+  -> (244,79) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, std::basic_ostream<char, std::char_traits<char>>::__ostream_type &(*)(std::basic_ostream<char, std::char_traits<char>>::__ostream_type &)) (isz = 0) (sz = 9)
+     [[ Called routine is noinline  <1>]]
+  -> (246,10) std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &, const char *) (isz = 15) (sz = 24)
+     [[ Called routine is noinline  <1>]]
+  -> (248,10) std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &, const char *) (isz = 15) (sz = 24)
+     [[ Called routine is noinline  <1>]]
+  -> (248,34) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, double) (isz = 1) (sz = 10)
+     [[ Called routine is noinline  <1>]]
+  -> (248,42) std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &, const char *) (isz = 15) (sz = 24)
+     [[ Called routine is noinline  <1>]]
+  -> (249,10) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, double) (isz = 1) (sz = 10)
+     [[ Called routine is noinline  <1>]]
+  -> (249,66) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, std::basic_ostream<char, std::char_traits<char>>::__ostream_type &(*)(std::basic_ostream<char, std::char_traits<char>>::__ostream_type &)) (isz = 0) (sz = 9)
+     [[ Called routine is noinline  <1>]]
+  -> EXTERN: (256,5) operator delete[](void *)
+  -> EXTERN: (257,5) operator delete[](void *)
+  -> EXTERN: (258,5) operator delete[](void *)
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at main.cpp(231,5)
+<Peeled loop for vectorization>
+   remark #15389: vectorization support: reference A[i] has unaligned access   [ main.cpp(232,9) ]
+   remark #15389: vectorization support: reference B[i] has unaligned access   [ main.cpp(233,9) ]
+   remark #15389: vectorization support: reference C[i] has unaligned access   [ main.cpp(234,9) ]
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15410: vectorization support: conversion from int to float will be emulated   [ main.cpp(232,16) ]
+   remark #15305: vectorization support: vector length 8
+   remark #15309: vectorization support: normalized vectorization overhead 0.241
+   remark #15301: PEEL LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at main.cpp(231,5)
+   remark #15389: vectorization support: reference A[i] has unaligned access   [ main.cpp(232,9) ]
+   remark #15388: vectorization support: reference B[i] has aligned access   [ main.cpp(233,9) ]
+   remark #15388: vectorization support: reference C[i] has aligned access   [ main.cpp(234,9) ]
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15412: vectorization support: streaming store was generated for A[i]   [ main.cpp(232,9) ]
+   remark #15412: vectorization support: streaming store was generated for B[i]   [ main.cpp(233,9) ]
+   remark #15412: vectorization support: streaming store was generated for C[i]   [ main.cpp(234,9) ]
+   remark #15412: vectorization support: streaming store was generated for A[i]   [ main.cpp(232,9) ]
+   remark #15412: vectorization support: streaming store was generated for B[i]   [ main.cpp(233,9) ]
+   remark #15412: vectorization support: streaming store was generated for C[i]   [ main.cpp(234,9) ]
+   remark #15410: vectorization support: conversion from int to float will be emulated   [ main.cpp(232,16) ]
+   remark #15305: vectorization support: vector length 8
+   remark #15309: vectorization support: normalized vectorization overhead 0.283
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15451: unmasked unaligned unit stride stores: 1 
+   remark #15467: unmasked aligned streaming stores: 3 
+   remark #15469: unmasked unaligned streaming stores: 3 
+   remark #15475: --- begin vector cost summary ---
+   remark #15476: scalar cost: 39 
+   remark #15477: vector cost: 6.620 
+   remark #15478: estimated potential speedup: 5.880 
+   remark #15486: divides: 1 
+   remark #15487: type converts: 1 
+   remark #15488: --- end vector cost summary ---
+   remark #25018: Total number of lines prefetched=2
+   remark #25021: Number of initial-value prefetches=4
+   remark #25035: Number of pointer data prefetches=2, dist=8
+   remark #25141: Using second-level distance 4 for prefetching pointer data reference   [ main.cpp(232,9) ]
+   remark #25015: Estimate of max trip count of loop=125000
+LOOP END
+
+LOOP BEGIN at main.cpp(231,5)
+<Alternate Alignment Vectorized Loop>
+   remark #25018: Total number of lines prefetched=4
+   remark #25021: Number of initial-value prefetches=6
+   remark #25035: Number of pointer data prefetches=4, dist=8
+   remark #25141: Using second-level distance 4 for prefetching pointer data reference   [ main.cpp(232,9) ]
+   remark #25141: Using second-level distance 4 for prefetching pointer data reference   [ main.cpp(233,9) ]
+   remark #25015: Estimate of max trip count of loop=125000
+LOOP END
+
+LOOP BEGIN at main.cpp(231,5)
+<Remainder loop for vectorization>
+   remark #15389: vectorization support: reference A[i] has unaligned access   [ main.cpp(232,9) ]
+   remark #15389: vectorization support: reference B[i] has unaligned access   [ main.cpp(233,9) ]
+   remark #15388: vectorization support: reference C[i] has aligned access   [ main.cpp(234,9) ]
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15410: vectorization support: conversion from int to float will be emulated   [ main.cpp(232,16) ]
+   remark #15305: vectorization support: vector length 8
+   remark #15309: vectorization support: normalized vectorization overhead 0.233
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at main.cpp(238,5)
+   remark #15382: vectorization support: call to function omp_get_wtime() cannot be vectorized   [ main.cpp(239,24) ]
+   remark #15382: vectorization support: call to function d_4d_mm(double *, double *, double *, long *, long *, long *, int, int) cannot be vectorized   [ main.cpp(240,9) ]
+   remark #15382: vectorization support: call to function omp_get_wtime() cannot be vectorized   [ main.cpp(241,24) ]
+   remark #15382: vectorization support: call to function std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &, const char *) cannot be vectorized   [ main.cpp(243,14) ]
+   remark #15382: vectorization support: call to function std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, double) cannot be vectorized   [ main.cpp(243,30) ]
+   remark #15382: vectorization support: call to function std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &, const char *) cannot be vectorized   [ main.cpp(243,46) ]
+   remark #15382: vectorization support: call to function std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, double) cannot be vectorized   [ main.cpp(244,14) ]
+   remark #15382: vectorization support: call to function std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, std::basic_ostream<char, std::char_traits<char>>::__ostream_type &(*)(std::basic_ostream<char, std::char_traits<char>>::__ostream_type &)) cannot be vectorized   [ main.cpp(244,79) ]
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization
+   remark #25015: Estimate of max trip count of loop=7
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+main.cpp(195,18):remark #34051: REGISTER ALLOCATION : [_Z9d4d_test3v] main.cpp:195
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   63[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm31 k0-k7]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   54[ rax rdx rcx rbx rsi rdi r8-r15 zmm0-zmm31 k0-k7]
+        
+    Routine temporaries
+        Total         :     534
+            Global    :     109
+            Local     :     425
+        Regenerable   :      60
+        Spilled       :      17
+        
+    Routine stack
+        Variables     :     120 bytes*
+            Reads     :      10 [2.66e+01 ~ 0.0%]
+            Writes    :      18 [2.27e+01 ~ 0.0%]
+        Spills        :     392 bytes*
+            Reads     :      29 [1.11e+02 ~ 0.0%]
+            Writes    :      17 [3.02e+01 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: d_4d_mm(double *, double *, double *, long *, long *, long *, int, int)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (d_4d_mm(double *, double *, double *, long *, long *, long *, int, int)) [9/22=40.9%] main.cpp(25,88)
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at main.cpp(30,5)
+   remark #25096: Loop Interchange not done due to: Imperfect Loop Nest (Either at Source or due to other Compiler Transformations)
+   remark #25452: Original Order found to be proper, but by a close margin
+   remark #15541: outer loop was not auto-vectorized: consider using SIMD directive
+
+   LOOP BEGIN at main.cpp(31,9)
+      remark #25096: Loop Interchange not done due to: Imperfect Loop Nest (Either at Source or due to other Compiler Transformations)
+      remark #25452: Original Order found to be proper, but by a close margin
+      remark #15541: outer loop was not auto-vectorized: consider using SIMD directive
+
+      LOOP BEGIN at main.cpp(32,13)
+         remark #25096: Loop Interchange not done due to: Imperfect Loop Nest (Either at Source or due to other Compiler Transformations)
+         remark #25452: Original Order found to be proper, but by a close margin
+         remark #15541: outer loop was not auto-vectorized: consider using SIMD directive
+
+         LOOP BEGIN at main.cpp(33,17)
+            remark #25101: Loop Interchange not done due to: Original Order seems proper
+            remark #25452: Original Order found to be proper, but by a close margin
+            remark #15541: outer loop was not auto-vectorized: consider using SIMD directive
+
+            LOOP BEGIN at main.cpp(34,21)
+            <Predicate Optimized v3>
+               remark #25422: Invariant Condition at line 40 hoisted out of this loop
+               remark #25422: Invariant Condition at line 54 hoisted out of this loop
+               remark #15344: loop was not vectorized: vector dependence prevents vectorization
+               remark #15346: vector dependence: assumed FLOW dependence between C[C_index] (69:25) and B[B_index] (69:25)
+               remark #15346: vector dependence: assumed ANTI dependence between B[B_index] (69:25) and C[C_index] (69:25)
+            LOOP END
+
+            LOOP BEGIN at main.cpp(34,21)
+            <Predicate Optimized v5>
+               remark #25422: Invariant Condition at line 54 hoisted out of this loop
+               remark #15344: loop was not vectorized: vector dependence prevents vectorization
+               remark #15346: vector dependence: assumed FLOW dependence between C[C_index] (69:25) and B[B_index] (69:25)
+               remark #15346: vector dependence: assumed ANTI dependence between B[B_index] (69:25) and C[C_index] (69:25)
+            LOOP END
+
+            LOOP BEGIN at main.cpp(34,21)
+            <Predicate Optimized v7>
+               remark #25422: Invariant Condition at line 54 hoisted out of this loop
+               remark #15344: loop was not vectorized: vector dependence prevents vectorization
+               remark #15346: vector dependence: assumed FLOW dependence between C[C_index] (69:25) and B[B_index] (69:25)
+               remark #15346: vector dependence: assumed ANTI dependence between B[B_index] (69:25) and C[C_index] (69:25)
+            LOOP END
+
+            LOOP BEGIN at main.cpp(34,21)
+            <Predicate Optimized v8>
+               remark #15344: loop was not vectorized: vector dependence prevents vectorization
+               remark #15346: vector dependence: assumed FLOW dependence between C[C_index] (69:25) and B[B_index] (69:25)
+               remark #15346: vector dependence: assumed ANTI dependence between B[B_index] (69:25) and C[C_index] (69:25)
+            LOOP END
+
+            LOOP BEGIN at main.cpp(34,21)
+            <Predicate Optimized v11>
+               remark #25422: Invariant Condition at line 40 hoisted out of this loop
+               remark #25422: Invariant Condition at line 54 hoisted out of this loop
+               remark #15344: loop was not vectorized: vector dependence prevents vectorization
+               remark #15346: vector dependence: assumed FLOW dependence between C[C_index] (69:25) and B[B_index] (69:25)
+               remark #15346: vector dependence: assumed ANTI dependence between B[B_index] (69:25) and C[C_index] (69:25)
+            LOOP END
+
+            LOOP BEGIN at main.cpp(34,21)
+            <Predicate Optimized v13>
+               remark #25422: Invariant Condition at line 54 hoisted out of this loop
+               remark #15344: loop was not vectorized: vector dependence prevents vectorization
+               remark #15346: vector dependence: assumed FLOW dependence between C[C_index] (69:25) and B[B_index] (69:25)
+               remark #15346: vector dependence: assumed ANTI dependence between B[B_index] (69:25) and C[C_index] (69:25)
+            LOOP END
+
+            LOOP BEGIN at main.cpp(34,21)
+            <Predicate Optimized v15>
+               remark #25422: Invariant Condition at line 54 hoisted out of this loop
+               remark #15344: loop was not vectorized: vector dependence prevents vectorization
+               remark #15346: vector dependence: assumed FLOW dependence between C[C_index] (69:25) and B[B_index] (69:25)
+               remark #15346: vector dependence: assumed ANTI dependence between B[B_index] (69:25) and C[C_index] (69:25)
+            LOOP END
+
+            LOOP BEGIN at main.cpp(34,21)
+            <Predicate Optimized v16>
+               remark #15344: loop was not vectorized: vector dependence prevents vectorization
+               remark #15346: vector dependence: assumed FLOW dependence between C[C_index] (69:25) and B[B_index] (69:25)
+               remark #15346: vector dependence: assumed ANTI dependence between B[B_index] (69:25) and C[C_index] (69:25)
+            LOOP END
+
+            LOOP BEGIN at main.cpp(34,21)
+            <Predicate Optimized v10>
+               remark #15344: loop was not vectorized: vector dependence prevents vectorization
+               remark #15346: vector dependence: assumed FLOW dependence between C[C_index] (69:25) and B[B_index] (69:25)
+               remark #15346: vector dependence: assumed ANTI dependence between B[B_index] (69:25) and C[C_index] (69:25)
+            LOOP END
+         LOOP END
+      LOOP END
+   LOOP END
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+main.cpp(25,88):remark #34051: REGISTER ALLOCATION : [_Z7d_4d_mmPdS_S_PlS0_S0_ii] main.cpp:25
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   63[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm31 k0-k7]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   18[ rax rdx rcx rbx rbp rsi rdi r8-r15 zmm0-zmm1 k1]
+        
+    Routine temporaries
+        Total         :     181
+            Global    :      73
+            Local     :     108
+        Regenerable   :       4
+        Spilled       :      34
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :     256 bytes*
+            Reads     :      92 [4.70e+04 ~ 11.6%]
+            Writes    :      39 [5.52e+03 ~ 1.4%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: std::char_traits<char>::length(const std::char_traits<char>::char_type *)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (std::char_traits<char>::length(const std::char_traits<char>::char_type *)) [12/22=54.5%] /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/char_traits.h(263,7)
+  -> EXTERN: (263,16) __builtin_strlen(const char *)
+
+
+    Report from: Code generation optimizations [cg]
+
+/usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/char_traits.h(263,7):remark #34051: REGISTER ALLOCATION : [_ZNSt11char_traitsIcE6lengthEPKc] /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/char_traits.h:263
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   55[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm31]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :    3[ rax rcx rdi]
+        
+    Routine temporaries
+        Total         :      12
+            Global    :       7
+            Local     :       5
+        Regenerable   :       0
+        Spilled       :       0
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: std::ctype<char>::widen(const std::ctype<char> *, char) const
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::ctype<char>::widen(const std::ctype<char> *, char) const) /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/locale_facets.h(873,7)
+
+===========================================================================
+
+Begin optimization report for: std::operator|(std::_Ios_Iostate, std::_Ios_Iostate)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::operator|(std::_Ios_Iostate, std::_Ios_Iostate)) /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/ios_base.h(164,3)
+
+===========================================================================
+
+Begin optimization report for: std::__check_facet<std::basic_ios<char, std::char_traits<char>>::__ctype_type>(const std::basic_ios<char, std::char_traits<char>>::__ctype_type *)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::__check_facet<std::basic_ios<char, std::char_traits<char>>::__ctype_type>(const std::basic_ios<char, std::char_traits<char>>::__ctype_type *)) /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/basic_ios.h(48,5)
+
+===========================================================================
+
+Begin optimization report for: __sti__$E()
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (__sti__$E()) [22/22=100.0%] <compiler generated>
+  -> EXTERN: /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/iostream:(74,25) __cxa_atexit()
+  -> EXTERN: /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/iostream:(74,25) std::ios_base::Init::Init(std::ios_base::Init *)
+
+
+    Report from: Code generation optimizations [cg]
+
+<compiler generated>:remark #34051: REGISTER ALLOCATION : [__sti__$E] (null):0
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   55[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm31]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :    3[ rdx rsi rdi]
+        
+    Routine temporaries
+        Total         :      13
+            Global    :       7
+            Local     :       6
+        Regenerable   :       7
+        Spilled       :       0
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINING FOOTNOTES:
+
+<1> The routine declaration is annotated with "__attribute__((noinline))".  
+    Remove this annotation to permit the compiler to inline this routine.
+
+<2> The function is larger than the inliner would normally inline.  Use the
+    option -inline-max-size to increase the size of any function that would
+    normally be inlined, add "inline __attribute__((always_inline))" to the
+    declaration of the called function, or add "#pragma forceinline" before
+    the call site.
+
